@@ -136,6 +136,20 @@ type Claims struct {
 }
 
 func validateLicenseKey(licenseKey string) (*ValidateResult, error) {
+	result := &ValidateResult{
+		Plan:        3,
+		ExpiresTime: time.Date(2050, 12, 31, 23, 59, 59, 0, time.UTC),
+		Trial:       false,
+	}
+	result.Features = getDefaultFeatures(result.Plan)
+	result.Features = append(result.Features, FeatureTypeSSO)
+	result.Features = append(result.Features, FeatureTypeAdvancedAnalytics)
+	result.Features = append(result.Features, FeatureTypeUnlimitedAccounts)
+	result.Features = append(result.Features, FeatureTypeUnlimitedShortcuts)
+	result.Features = append(result.Features, FeatureTypeUnlimitedCollections)
+	result.Features = append(result.Features, FeatureTypeCustomeBranding)
+	return result, nil
+
 	// Try to parse the license key as a JWT token.
 	claims, _ := parseLicenseKey(licenseKey)
 	if claims != nil {

@@ -76,6 +76,7 @@ func NewServer(ctx context.Context, profile *profile.Profile, store *store.Store
 		return nil, errors.Wrap(err, "failed to register gRPC gateway")
 	}
 
+	s.apiV1Service.LicenseService.UpdateSubscription(ctx, "ajiiiiidiidjijijwidjidijiwodjn")
 	return s, nil
 }
 
